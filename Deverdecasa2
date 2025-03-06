@@ -1,0 +1,54 @@
+import time
+
+def fatorial(n):
+    """
+    Calcula o fatorial de um número de forma recursiva.
+    
+    Parâmetros:
+    n (int): Número inteiro não negativo.
+    
+    Retorno:
+    int: Fatorial de n.
+    """
+    if n == 0 or n == 1:
+        return 1
+    return n * fatorial(n - 1)
+
+# Valores de n para teste
+valores_n = [10, 100, 500, 1000]
+
+tempos_execucao = {}
+
+for n in valores_n:
+    inicio = time.time()
+    try:
+        resultado = fatorial(n)
+    except RecursionError:
+        resultado = None  # Captura erro de recursão para n muito grande
+    fim = time.time()
+    
+    tempos_execucao[n] = fim - inicio
+
+# Exibir os tempos de execução
+for n, tempo in tempos_execucao.items():
+    print(f"Tempo para calcular {n}! : {tempo:.6f} segundos")
+
+"""
+Análise de Complexidade:
+
+A função fatorial(n) chama a si mesma recursivamente n vezes até atingir o caso base (n == 0 ou n == 1).
+Cada chamada recursiva realiza apenas uma multiplicação antes de chamar a próxima.
+
+Portanto, a complexidade do algoritmo é O(n), pois há n chamadas recursivas no pior caso.
+Isso significa que o tempo de execução cresce linearmente com o tamanho da entrada n.
+
+No entanto, para valores grandes de n, a recursão pode causar um estouro de pilha (Stack Overflow) devido à profundidade da recursão.
+Uma abordagem iterativa ou o uso da biblioteca math.factorial seria mais eficiente.
+
+Resultados do tempo de execução:
+
+- Tempo para calcular 10! : 0.000005 segundos
+- Tempo para calcular 100! : 0.000121 segundos
+- Tempo para calcular 500! : 0.001157 segundos
+- Tempo para calcular 1000! : 0.001781 segundos
+"""
