@@ -1,0 +1,16 @@
+import math
+
+def F(n):
+    if n == 1:
+        return 2
+    return 2 * F(n - 1) + n ** 2
+
+def F_closed(n):
+    return (2 ** n) * (1 + (n * (n + 1)) / 2) - n ** 2 - 2 * n - 2
+
+# Solicita ao usuário um valor de n
+n = int(input("Digite um valor para n: "))
+
+# Calcula e exibe o resultado usando a fórmula fechada
+resultado = F_closed(n)
+print(f"F({n}) = {resultado}")
